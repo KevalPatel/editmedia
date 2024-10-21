@@ -1,1 +1,20 @@
-<p>login works!</p>
+<ng-container *ngIf="!userService.isUserLoggedIn">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow p-4" style="width: 350px;">
+            <div class="card-body text-center">
+                <h3 class="card-title mb-4">Login
+                    isUserLoggedIn: {{userService.isUserLoggedIn}}</h3>
+
+                <button (click)="loginWithGoogle()" class="btn btn-danger btn-block w-100 mb-4">
+                    <i class="fab fa-google mr-2"></i> Login with Google
+                </button>
+
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="userService.isUserLoggedIn">
+    <p>Welcome, {{ userService.currentUser()?.displayName }}!</p>
+    <button (click)="logout()">Logout</button>
+</ng-container>
