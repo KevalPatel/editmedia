@@ -12,12 +12,7 @@ import { of } from 'rxjs';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  // items$: Observable<any[]>;
 
   constructor() {
-    of
-    // const itemsCollection = collection(this.firestore, 'users');
-    // this.items$ = collectionData(itemsCollection);
-    // console.log(this.items$);
   }
 }
