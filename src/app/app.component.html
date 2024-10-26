@@ -1,18 +1,2 @@
-<!-- <ul>
-    <li *ngFor="let item of items$ | async">
-        {{ item.ContactNumber }}
-    </li>
-</ul>
-
-<ng-container *ngIf="currentUser">
-    <div>
-        {{currentUser | json}}
-        <p>Welcome, {{ currentUser?.displayName }}!</p>
-        <button (click)="logout()">Logout</button>
-    </div>
-</ng-container>
-@if(!currentUser){
-<button (click)="login()">Login with Google</button>
-} -->
 <app-login></app-login>
 <router-outlet />

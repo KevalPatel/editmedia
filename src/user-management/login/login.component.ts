@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore } from '@angular/fire/firestore';
 import firebase from 'firebase/compat/app';
-import { UserService } from '../../common/user.service';
+import { UserService } from '../../db/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,22 +12,25 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  private firestore: Firestore = inject(Firestore);
   private fireauth: AngularFireAuth = inject(AngularFireAuth);
   public userService: UserService = inject(UserService);
 
   constructor() {
     this.fireauth.authState.subscribe((user) => {
       this.userService.currentUser.set(user);
-      console.log('USER: ', user);
     });
   }
 
   loginWithGoogle() {
     this.fireauth
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then((result) => {
-        console.log('Logged in with Google:', result.user);
+      .then((gUser) => {
+        this.userService
+          .CreateUserIfNotExists(gUser)
+          .then((result: boolean) => {
+            console.log('Logged in with Google:', gUser.user);
+            console.log(result);
+          });
       })
       .catch((error) => {
         console.error('Error during login:', error);

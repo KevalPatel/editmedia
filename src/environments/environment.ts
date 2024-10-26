@@ -8,5 +8,6 @@ export const environment = {
     messagingSenderId: '639953258552',
     appId: '1:639953258552:web:8a1aa8642500369469fecd',
     measurementId: 'G-7CJEJF05FF',
+    databaseURL: 'https://video-edit-c6a75.firebaseio.com'
   },
 };
