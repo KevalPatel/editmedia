@@ -30,6 +30,7 @@ export class UserService {
   async CreateUserIfNotExists(
     result: firebase.auth.UserCredential
   ): Promise<boolean> {
+    let response = false;
     let database = getFirestore();
     if (result?.user?.uid) {
       const userRef = doc(database, Constant.USER_TABLE_NAME, result.user.uid);
@@ -50,20 +51,20 @@ export class UserService {
           userData,
         })
           .then((res) => {
-            return true;
+            response = true;
           })
           .catch((err) => {
             console.log('ERROR: USER NOT CREATED' + err);
-            return false;
+            response = false;
           });
       } else {
         console.log('ERROR: USER Already exists');
-        return true;
+        response = true;
       }
     } else {
       console.log('ERROR: USER NOT CREATED FROM GOOGLE');
-      return false;
+      response = false;
     }
-    return false;
+    return response;
   }
 }
