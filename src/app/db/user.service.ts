@@ -1,10 +1,8 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import { StorageService } from '../common/storage.service';
-import { Observable, of } from 'rxjs';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import { Constant } from '../common/constant';
-import { Firestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +11,6 @@ export class UserService {
   currentUser = signal<firebase.User | null>(null);
   isUserLoggedIn: boolean | undefined = false;
   private storageService: StorageService = inject(StorageService);
-
-  // database: Firestore = null;
 
   constructor() {
     effect(() => {
