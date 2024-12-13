@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';  
-import { Auth, ConfirmationResult, RecaptchaVerifier } from '@angular/fire/auth';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { ConfirmationResult, RecaptchaVerifier } from '@angular/fire/auth';
+import { getAuth } from "firebase/auth";
 import { WindowsService } from '../../common/windows.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 

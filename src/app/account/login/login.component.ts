@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { UserService } from '../../db/user.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
   private fireauth: AngularFireAuth = inject(AngularFireAuth);
   public userService: UserService = inject(UserService);
 
-  constructor() {
+  constructor(private router: Router) {
     this.fireauth.authState.subscribe((user) => {
       this.userService.currentUser.set(user);
     });
@@ -30,6 +31,7 @@ export class LoginComponent {
           .then((result: boolean) => {
             console.log('Logged in with Google:', gUser.user);
             console.log(result);
+            this.router.navigate(['/phone-verification']);
           });
       })
       .catch((error) => {
@@ -37,7 +39,4 @@ export class LoginComponent {
       });
   }
 
-  logout() {
-    this.fireauth.signOut();
-  }
 }

@@ -1,2 +1,11 @@
-<app-login></app-login>
-<router-outlet />
+<ng-container *ngIf="!userService.isUserLoggedIn">
+    <app-login></app-login>
+</ng-container>
+
+<ng-container *ngIf="userService.isUserLoggedIn">
+    <p>Welcome, {{ userService.currentUser()?.displayName }}!</p>
+    <button (click)="logout()">Logout</button>
+
+    <router-outlet />
+
+</ng-container>
