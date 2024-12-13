@@ -1,0 +1,20 @@
+<div class="container">
+    <h2>Phone Authentication</h2>
+  
+    <!-- Phone Input -->
+    <input type="text" class="form-control mb-3" placeholder="Enter phone number" [(ngModel)]="phoneNumber" />
+  
+    <!-- Recaptcha -->
+    <div id="recaptcha-container"></div>
+  
+    <!-- Buttons -->
+    <button (click)="sendVerificationCode()" class="btn btn-primary">Send Code</button>
+    <br /><br />
+    
+    <!-- Verification Code Input -->
+     <ng-container *ngIf="confirmationResult != null">
+      <input type="text" class="form-control mb-3" placeholder="Enter verification code" [(ngModel)]="verificationCode" />
+      <button (click)="verifyCode()" class="btn btn-success">Verify Code</button>
+     </ng-container>
+  </div>
+  
