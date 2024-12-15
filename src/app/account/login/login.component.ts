@@ -5,6 +5,7 @@ import { UserService } from '../../db/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { StorageService } from '../../common/storage.service';
+import { UserDto } from './login.model';
 
 @Component({
   selector: 'app-login',
@@ -49,7 +50,7 @@ export class LoginComponent {
               // // if user already have phone number, then navigate to HOME
               // this.router.navigate(['/phone-verification']);
 
-              this.router.navigate(['/content-description']);
+              this.router.navigate(['/projects']);
             }
           });
       })

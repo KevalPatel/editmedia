@@ -1,4 +1,4 @@
-interface UserDto {
+export interface UserDto {
   Uid?: string | null | undefined;
   UserName: string | null | undefined;
   Provider: string | null | undefined;

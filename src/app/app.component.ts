@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './account/login/login.component';
 import { UserService } from './db/user.service';
@@ -16,11 +16,12 @@ export class AppComponent {
 
   private fireauth: AngularFireAuth = inject(AngularFireAuth);
   public userService: UserService = inject(UserService);
-  constructor() {
+  constructor(private router: Router) {
   }
   
   logout() {
     this.fireauth.signOut();
+    this.router.navigate(['']);
   }
   
 }
