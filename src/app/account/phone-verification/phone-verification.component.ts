@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';  
 import { ConfirmationResult, RecaptchaVerifier } from '@angular/fire/auth';
 import { getAuth } from "firebase/auth";
 import { WindowsService } from '../../common/windows.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserService } from '../../db/user.service';
 
 @Component({
   selector: 'phone-verification',
@@ -20,6 +21,7 @@ export class PhoneVerificationComponent implements OnInit {
   verificationCode: string = '';
   confirmationResult: ConfirmationResult | null = null;
 
+  public userService: UserService = inject(UserService);
   constructor(private afAuth: AngularFireAuth, private win: WindowsService) {
   }
 
@@ -60,6 +62,7 @@ export class PhoneVerificationComponent implements OnInit {
       this.confirmationResult
         .confirm(this.verificationCode)
         .then(result => {
+          this.userService.UpdatePhoneNumber(this.phoneNumber);
           console.log('Phone number verified!', result.user);
         })
         .catch(error => {
