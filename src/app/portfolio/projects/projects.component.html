@@ -1,1 +1,15 @@
 <p>projects works!</p>
+
+
+
+    <div *ngFor="let project of projects">
+        <project [projectData]="project"></project>
+    </div>
+
+<ng-container *ngIf="projects && projects.length > 0">
+    {{projects.length}}
+</ng-container>
+
+<ng-container *ngIf="!projects || projects.length == 0">
+    No projects
+</ng-container>

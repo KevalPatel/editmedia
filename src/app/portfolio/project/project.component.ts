@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { ProjectDto } from '../projects/projects.model';
 
 @Component({
   selector: 'project',
@@ -10,4 +11,7 @@ import { Component } from '@angular/core';
 })
 export class ProjectComponent {
 
+  projectData = input<ProjectDto>(); 
+
+  
 }
