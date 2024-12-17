@@ -2,14 +2,14 @@ export interface ProjectDto {
   id: string;
   projectName: string;
   FunctionType: string;
-  RequirePhotoAlbum?: boolean | null | undefined;
-  RequireVideoAlbum?: boolean | null | undefined;
-  PreferedAudioURL?: string | null | undefined;
-  StorageLocationURL?: string | null | undefined;
-  TotalSizeAllowed?: number | null | undefined;
+  requirement: string;
+  StorageLocationURL: string;
+  TotalSizeAllowed: number;
   UserNotes?: string | null | undefined;
+  PreferedAudio?: string | null | undefined;
   CreatedOn: Date;
   ExpireOn: Date;
+  IsActive: boolean;
 }
 
 export interface ProjectsDto {

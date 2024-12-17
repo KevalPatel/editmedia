@@ -30,7 +30,7 @@
             <div class="d-flex flex-wrap gap-3">
                 <div class="form-check form-check-inline">
                     <input type="radio" id="RequirePhotoAlbum" class="form-check-input"
-                        formControlName="requirement" value="RequirePhotoAlbum" />
+                        formControlName="requirement" value="PHOTO" />
                     <div class="text-center">
                         <label class="form-check-label" for="RequirePhotoAlbum">
                             <div class="container mt-5">
@@ -47,7 +47,7 @@
 
                 <div class="form-check form-check-inline">
                     <input type="radio" id="RequireVideo" class="form-check-input" 
-                    formControlName="requirement" value="RequireVideo" />
+                    formControlName="requirement" value="VIDEO" />
                     <div class="text-center">
                         <label class="form-check-label" for="RequireVideo">
                             <div class="container mt-5">
@@ -64,14 +64,14 @@
 
                 <div class="form-check form-check-inline">
                     <input type="radio" id="RequirePhotoAlbumAndVideo" class="form-check-input"
-                        formControlName="requirement" value="RequirePhotoAlbumAndVideo" />
+                        formControlName="requirement" value="PHOTOVIDEO" />
                     <div class="text-center">
                         <label class="form-check-label" for="RequirePhotoAlbumAndVideo">
                             <div class="container mt-5">
                                 <div class="video-box">
                                     <div class="icon-text">
-                                        <i class="bi bi-camera-video fa-2x" style="font-size: 30px"></i>
-                                        <i class="bi bi-camera fa-2x" style="font-size: 30px"></i>
+                                        <i class="bi bi-camera fa-2x" style="float: left;"></i>
+                                        <i class="bi bi-camera-video fa-2x"></i>
                                         <span>Photo & Video</span>
                                     </div>
                                 </div>
@@ -82,12 +82,21 @@
             </div>
         </div>
 
-        <!-- Expected Video Length -->
-        <div class="mb-3" *ngIf="isVideoRequired()">
-            <label for="expectedVideoLength" class="form-label">Expected Video Length (Minutes)</label>
-            <input type="number" id="expectedVideoLength" class="form-control" formControlName="expectedVideoLength"
-                placeholder="Enter video length in minutes" />
-        </div>
+        <ng-container *ngIf="isVideoRequired()">
+            <!-- Expected Video Length -->
+            <div class="mb-3">
+                <label for="expectedVideoLength" class="form-label">Expected Video Length (Minutes)</label>
+                <input type="number" id="expectedVideoLength" class="form-control" formControlName="expectedVideoLength"
+                    placeholder="Enter video length in minutes" />
+            </div>
+        
+            <!-- Preffered Audio -->
+            <div class="mb-3">
+                <label for="preferedAudio" class="form-label">Preffered Audio for video</label>
+                <input type="text" id="preferedAudio" class="form-control" formControlName="preferedAudio" maxlength="250"
+                    placeholder="Provide audio name or link of your choice" />
+            </div>
+        </ng-container>
 
         <!-- Additional Notes -->
         <div class="mb-3">

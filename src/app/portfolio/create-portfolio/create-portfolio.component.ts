@@ -22,6 +22,7 @@ export class CreatePortfolioComponent implements OnInit {
       projectType: ['Wedding', [Validators.required]],
       requirement: ['', Validators.required],
       expectedVideoLength: [{ value: '', disabled: true }, Validators.pattern('^[0-9]*$')],
+      preferedAudio: ['', Validators.maxLength(600)],
       additionalNotes: ['', Validators.maxLength(2000)],
     });
 
@@ -35,7 +36,7 @@ export class CreatePortfolioComponent implements OnInit {
     const requirement = this.projectForm.get('requirement')?.value;
     const videoLengthField = this.projectForm.get('expectedVideoLength');
 
-    if (requirement == 'RequireVideo' || requirement == 'RequirePhotoAlbumAndVideo') {
+    if (requirement == 'VIDEO' || requirement == 'PHOTOVIDEO') {
       videoLengthField?.enable();
     } else {
       videoLengthField?.disable();
@@ -45,7 +46,7 @@ export class CreatePortfolioComponent implements OnInit {
 
   isVideoRequired(): boolean {
     const requirement = this.projectForm.get('requirement')?.value;
-    return requirement === 'RequireVideo' || requirement === 'RequirePhotoAlbumAndVideo';
+    return requirement === 'VIDEO' || requirement === 'PHOTOVIDEO';
   }
 
   onSubmit(): void {
