@@ -29,31 +29,55 @@
             <label class="form-label">Requirements</label>
             <div class="d-flex flex-wrap gap-3">
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" id="requirePhotoAlbum" class="form-check-input"
-                        formControlName="requirePhotoAlbum" />
-                    <label class="form-check-label" for="requirePhotoAlbum">
-                        <img src="photo-icon.png" alt="Photo Album" class="rounded float-left" style="height: 50px;">
-                    </label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                    <input type="checkbox" id="requireVideo" class="form-check-input" formControlName="requireVideo" />
+                    <input type="radio" id="RequirePhotoAlbum" class="form-check-input"
+                        formControlName="requirement" value="RequirePhotoAlbum" />
                     <div class="text-center">
-                        <label class="form-check-label" for="requireVideo">
-                            <img src="video-icon.png" alt="Video" class="rounded" style="height: 50px;">
-                            Video
+                        <label class="form-check-label" for="RequirePhotoAlbum">
+                            <div class="container mt-5">
+                                <div class="video-box">
+                                    <div class="icon-text">
+                                        <i class="bi bi-camera fa-4x"></i> <!-- camera Icon -->
+                                        <span>Only Photo Album</span>
+                                    </div>
+                                </div>
+                            </div>
                         </label>
                     </div>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" id="requirePhotoAlbumAndVideo" class="form-check-input"
-                        formControlName="requirePhotoAlbumAndVideo" />
-                    <label class="form-check-label" for="requirePhotoAlbumAndVideo">
-                        <img src="photo-video-icon.png" alt="Photo & Video" class="rounded float-right"
-                            style="height: 50px;">
-                        Photo & Video
-                    </label>
+                    <input type="radio" id="RequireVideo" class="form-check-input" 
+                    formControlName="requirement" value="RequireVideo" />
+                    <div class="text-center">
+                        <label class="form-check-label" for="RequireVideo">
+                            <div class="container mt-5">
+                                <div class="video-box">
+                                    <div class="icon-text">
+                                        <i class="bi bi-camera-video fa-4x"></i> <!-- Video Icon -->
+                                        <span>Only Video</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="RequirePhotoAlbumAndVideo" class="form-check-input"
+                        formControlName="requirement" value="RequirePhotoAlbumAndVideo" />
+                    <div class="text-center">
+                        <label class="form-check-label" for="RequirePhotoAlbumAndVideo">
+                            <div class="container mt-5">
+                                <div class="video-box">
+                                    <div class="icon-text">
+                                        <i class="bi bi-camera-video fa-2x" style="font-size: 30px"></i>
+                                        <i class="bi bi-camera fa-2x" style="font-size: 30px"></i>
+                                        <span>Photo & Video</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>

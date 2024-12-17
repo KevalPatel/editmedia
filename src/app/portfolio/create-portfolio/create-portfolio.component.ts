@@ -20,32 +20,32 @@ export class CreatePortfolioComponent implements OnInit {
     this.projectForm = this.fb.group({
       projectName: ['', [Validators.required, Validators.maxLength(250)]],
       projectType: ['Wedding', [Validators.required]],
-      requirePhotoAlbum: [false],
-      requireVideo: [false],
-      requirePhotoAlbumAndVideo: [false],
+      requirement: ['', Validators.required],
       expectedVideoLength: [{ value: '', disabled: true }, Validators.pattern('^[0-9]*$')],
       additionalNotes: ['', Validators.maxLength(2000)],
     });
 
-    // Watch for changes in video-related fields to toggle the expected video length field
-    this.projectForm.get('requireVideo')?.valueChanges.subscribe(() => this.toggleVideoLengthField());
-    this.projectForm.get('requirePhotoAlbumAndVideo')?.valueChanges.subscribe(() => this.toggleVideoLengthField());
+    // Watch for changes in the 'requirement' field
+    this.projectForm.get('requirement')?.valueChanges.subscribe(() => {
+      this.toggleVideoLengthField();
+    });
   }
 
   toggleVideoLengthField(): void {
-    const requireVideo = this.projectForm.get('requireVideo')?.value;
-    const requirePhotoAlbumAndVideo = this.projectForm.get('requirePhotoAlbumAndVideo')?.value;
+    const requirement = this.projectForm.get('requirement')?.value;
     const videoLengthField = this.projectForm.get('expectedVideoLength');
 
-    if (requireVideo || requirePhotoAlbumAndVideo) {
+    if (requirement == 'RequireVideo' || requirement == 'RequirePhotoAlbumAndVideo') {
       videoLengthField?.enable();
     } else {
       videoLengthField?.disable();
+      videoLengthField?.reset();
     }
   }
 
   isVideoRequired(): boolean {
-    return this.projectForm.get('requireVideo')?.value || this.projectForm.get('requirePhotoAlbumAndVideo')?.value;
+    const requirement = this.projectForm.get('requirement')?.value;
+    return requirement === 'RequireVideo' || requirement === 'RequirePhotoAlbumAndVideo';
   }
 
   onSubmit(): void {
