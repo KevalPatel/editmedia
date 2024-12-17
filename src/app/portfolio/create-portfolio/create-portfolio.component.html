@@ -1,0 +1,78 @@
+<div class="container mt-4">
+    <h2>Create New Project</h2>
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <!-- Project Name -->
+        <div class="mb-3">
+            <label for="projectName" class="form-label">Project Name <span class="text-danger">*</span></label>
+            <input type="text" id="projectName" class="form-control" formControlName="projectName" maxlength="250"
+                placeholder="Enter project name" required />
+            <div *ngIf="projectForm.get('projectName')?.invalid && projectForm.get('projectName')?.touched"
+                class="text-danger">
+                Project name is required and cannot exceed 250 characters.
+            </div>
+        </div>
+
+        <!-- Project Type -->
+        <div class="mb-3">
+            <label for="projectType" class="form-label">Project Type</label>
+            <select id="projectType" class="form-select" formControlName="projectType">
+                <option value="">Select Project Type</option>
+                <option value="Wedding">Wedding</option>
+                <option value="Birthday">Birthday</option>
+                <option value="Travel Journey">Travel Journey</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <!-- Boolean Options -->
+        <div class="mb-3">
+            <label class="form-label">Requirements</label>
+            <div class="d-flex flex-wrap gap-3">
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" id="requirePhotoAlbum" class="form-check-input"
+                        formControlName="requirePhotoAlbum" />
+                    <label class="form-check-label" for="requirePhotoAlbum">
+                        <img src="photo-icon.png" alt="Photo Album" class="rounded float-left" style="height: 50px;">
+                    </label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" id="requireVideo" class="form-check-input" formControlName="requireVideo" />
+                    <div class="text-center">
+                        <label class="form-check-label" for="requireVideo">
+                            <img src="video-icon.png" alt="Video" class="rounded" style="height: 50px;">
+                            Video
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" id="requirePhotoAlbumAndVideo" class="form-check-input"
+                        formControlName="requirePhotoAlbumAndVideo" />
+                    <label class="form-check-label" for="requirePhotoAlbumAndVideo">
+                        <img src="photo-video-icon.png" alt="Photo & Video" class="rounded float-right"
+                            style="height: 50px;">
+                        Photo & Video
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expected Video Length -->
+        <div class="mb-3" *ngIf="isVideoRequired()">
+            <label for="expectedVideoLength" class="form-label">Expected Video Length (Minutes)</label>
+            <input type="number" id="expectedVideoLength" class="form-control" formControlName="expectedVideoLength"
+                placeholder="Enter video length in minutes" />
+        </div>
+
+        <!-- Additional Notes -->
+        <div class="mb-3">
+            <label for="additionalNotes" class="form-label">Additional Notes</label>
+            <textarea id="additionalNotes" class="form-control" formControlName="additionalNotes" rows="5"
+                maxlength="2000" placeholder="Provide additional details here..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Submit</button>
+    </form>
+</div>

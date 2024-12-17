@@ -1,15 +1,14 @@
 <p>projects works!</p>
 
-
-
+<ng-container *ngIf="projects && projects.length > 0">
     <div *ngFor="let project of projects">
         <project [projectData]="project"></project>
     </div>
-
-<ng-container *ngIf="projects && projects.length > 0">
-    {{projects.length}}
 </ng-container>
 
 <ng-container *ngIf="!projects || projects.length == 0">
-    No projects
+    <div class="container text-center mt-5">
+        <h4 class="mb-3">You don't have any projects.</h4>
+        <button class="btn btn-primary" [routerLink]="['/create-portfolio']">Create One</button>
+    </div>
 </ng-container>

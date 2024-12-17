@@ -3,16 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from './projects.service';
 import { ProjectDto, ProjectsDto } from './projects.model';
 import { ProjectComponent } from '../project/project.component';
+import { CreatePortfolioComponent } from '../create-portfolio/create-portfolio.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'projects',
   standalone: true,
-  imports: [CommonModule, ProjectComponent],
+  imports: [CommonModule, ProjectComponent, CreatePortfolioComponent, RouterModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css',
 })
 export class ProjectsComponent implements OnInit {
-
   projects: ProjectDto[] | null | undefined;
   constructor(private projectsService: ProjectsService) {}
 
