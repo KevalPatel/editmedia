@@ -64,9 +64,9 @@ export class CreatePortfolioComponent implements OnInit {
 
   onSubmit(): void {
     if (this.projectForm.valid) {
-      let ProjectData: ProjectDto = {
+      // let ProjectData: ProjectDto = {
         
-      };
+      // };
       this.projectService
         .CreateProject(this.projectForm.value)
         .then((res: boolean) => {

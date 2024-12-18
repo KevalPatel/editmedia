@@ -5,6 +5,7 @@ import { Constant } from '../common/constant';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { DatabaseService } from './database.service';
 import { ProjectDto, ProjectsDto } from '../portfolio/projects/projects.model';
+import { UserDetailsDto } from './database.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ import { ProjectDto, ProjectsDto } from '../portfolio/projects/projects.model';
 export class UserService {
   currentUser = signal<firebase.User | null>(null);
   isUserLoggedIn: boolean = false;
+  // userDetailsDto: UserDetailsDto
 
   constructor(
     private db: AngularFireDatabase,
