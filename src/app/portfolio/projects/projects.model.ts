@@ -1,17 +1,17 @@
-export interface ProjectDto {
-  id: string;
-  projectName: string;
-  FunctionType: string;
-  requirement: string;
-  StorageLocationURL: string;
-  TotalSizeAllowed: number;
-  UserNotes?: string | null | undefined;
-  PreferedAudio?: string | null | undefined;
-  CreatedOn: Date;
-  ExpireOn: Date;
-  IsActive: boolean;
+export class ProjectDto {
+  Id: string = '';
+  projectName: string = '';
+  FunctionType: string = '';
+  Requirement: string = '';
+  StorageLocationURL: string = '';
+  TotalSizeAllowed: number = 40;
+  UserNotes?: string = '';
+  PreferedAudio?: string = '';
+  CreatedOn: Date = new Date();
+  ExpireOn: Date = new Date()
+  IsActive: boolean = true;
 }
 
-export interface ProjectsDto {
-  Projects?: ProjectDto[] | null;
+export class ProjectsDto {
+  Projects?: ProjectDto[];
 }

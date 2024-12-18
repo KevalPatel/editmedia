@@ -1,7 +1,15 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { CreatePortfolioService } from './create-portfolio.service';
+import { ProjectDto } from '../projects/projects.model';
 
 @Component({
   selector: 'create-portfolio',
@@ -11,17 +19,22 @@ import { BrowserModule } from '@angular/platform-browser';
   styleUrl: './create-portfolio.component.css',
 })
 export class CreatePortfolioComponent implements OnInit {
-
   projectForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private projectService: CreatePortfolioService
+  ) {}
 
   ngOnInit(): void {
     this.projectForm = this.fb.group({
       projectName: ['', [Validators.required, Validators.maxLength(250)]],
       projectType: ['Wedding', [Validators.required]],
       requirement: ['', Validators.required],
-      expectedVideoLength: [{ value: '', disabled: true }, Validators.pattern('^[0-9]*$')],
+      expectedVideoLength: [
+        { value: '', disabled: true },
+        Validators.pattern('^[0-9]*$'),
+      ],
       preferedAudio: ['', Validators.maxLength(600)],
       additionalNotes: ['', Validators.maxLength(2000)],
     });
@@ -51,6 +64,17 @@ export class CreatePortfolioComponent implements OnInit {
 
   onSubmit(): void {
     if (this.projectForm.valid) {
+      let ProjectData: ProjectDto = {
+        
+      };
+      this.projectService
+        .CreateProject(this.projectForm.value)
+        .then((res: boolean) => {
+          console.log("Component SUCC: ", res);
+        })
+        .catch((res: any) => {
+          console.log("Component Err: ", res);
+        });
       console.log('Form Submitted', this.projectForm.value);
     }
   }
