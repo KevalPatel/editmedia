@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { StorageService } from '../../common/storage.service';
 import { UserDto } from './login.model';
+import { UserDetailsDto } from '../../db/database.model';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,13 @@ export class LoginComponent {
   constructor(private router: Router) {
     this.fireauth.authState.subscribe((user) => {
       this.userService.currentUser.set(user);
+      if (!user?.isAnonymous) {
+        this.userService
+          .GetCurrentUserDocument()
+          .then((value: UserDetailsDto) => {
+            this.userService.userDetailsDto.set(value);
+          });
+      }
     });
   }
 
@@ -36,11 +44,11 @@ export class LoginComponent {
 
             // Create object and keep inside storage.
             let storageObj: UserDto = {
-              Email : gUser.user?.email,
+              Email: gUser.user?.email,
               Provider: gUser.user?.providerId,
               TokenDetail: gUser,
               Uid: gUser.user?.uid,
-              UserName: gUser.user?.displayName
+              UserName: gUser.user?.displayName,
             };
             if (result) {
               this.storageService.set(

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { ProjectDto } from '../projects/projects.model';
+import { ProjectDto } from '../../db/database.model';
 
 @Component({
   selector: 'project',

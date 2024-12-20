@@ -7,9 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { CreatePortfolioService } from './create-portfolio.service';
-import { ProjectDto } from '../projects/projects.model';
+import { ProjectsService } from '../projects/projects.service';
 
 @Component({
   selector: 'create-portfolio',
@@ -23,7 +21,7 @@ export class CreatePortfolioComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private projectService: CreatePortfolioService
+    private projectService: ProjectsService
   ) {}
 
   ngOnInit(): void {

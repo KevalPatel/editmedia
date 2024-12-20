@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from './projects.service';
-import { ProjectDto, ProjectsDto } from './projects.model';
+import { ProjectsDto } from './projects.model';
 import { ProjectComponent } from '../project/project.component';
 import { CreatePortfolioComponent } from '../create-portfolio/create-portfolio.component';
 import { RouterModule } from '@angular/router';
+import { ProjectDto } from '../../db/database.model';
 
 @Component({
   selector: 'projects',
