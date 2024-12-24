@@ -5,8 +5,6 @@
 <ng-container *ngIf="userService.isUserLoggedIn">
     <!-- <p>Welcome, {{ userService.currentUser()?.displayName }}!</p> -->
     <button (click)="logout()">Logout</button>
-    USER::
-    {{userService.userDetailsDto()|json}}
     <router-outlet />
 
 </ng-container>

@@ -1,10 +1,19 @@
 import { effect, inject, Injectable, signal } from '@angular/core';
 import firebase from 'firebase/compat/app';
-import { doc, setDoc, getDoc, collection, onSnapshot } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  onSnapshot,
+  getDocs,
+  query,
+} from 'firebase/firestore';
 import { Constant } from '../common/constant';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { DatabaseService } from './database.service';
-import { ProjectDto, UserDetailsDto, UserProfileDto } from './database.model';
+import { ProjectDto, UserProfileDto } from './database.model';
+import { ref } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +21,8 @@ import { ProjectDto, UserDetailsDto, UserProfileDto } from './database.model';
 export class UserService {
   currentUser = signal<firebase.User | null>(null);
   isUserLoggedIn: boolean = false;
-  userDetailsDto = signal<UserDetailsDto>({});
+  userDetails = signal<UserProfileDto | null>(null);
+  projectDetails = signal<ProjectDto[] | null>([]);
 
   constructor(
     private db: AngularFireDatabase,
@@ -24,32 +34,30 @@ export class UserService {
     });
   }
 
-  async GetCurrentUserDocument(): Promise<any>{
+  async GetCurrentUserData() {
+    await onSnapshot(
+      doc(this.databseService.database, Constant.TABLE_USER, this.getUserId()),
+      (doc) => {
+        this.userDetails.set(doc.get('UserData') as UserProfileDto);
+      }
+    );
 
-    await onSnapshot(doc(this.databseService.database,Constant.USER_TABLE_NAME,
-      this.getUserId()), doc => {
-        
-        let userDetails: UserDetailsDto = {
-          profile: doc.get('UserData') as UserProfileDto,
-          Projects: doc.get('Projects') as ProjectDto[]
-        }
-        this.userDetailsDto.set(userDetails);
-        return new Promise<UserDetailsDto>((resolve, reject) => {
-          resolve(userDetails);
-        });
+    const subColRef = query(
+      collection(
+        this.databseService.database,
+        Constant.TABLE_USER,
+        this.getUserId(),
+        Constant.TABLE_PROJECT
+      )
+    );
+    await onSnapshot(subColRef, (querySnapshot) => {
+      const projects: any = [];
+      querySnapshot.forEach((doc) => {
+        projects.push(doc.data());
       });
-
-    // const userRef = doc(
-    //   this.databseService.database,
-    //   Constant.USER_TABLE_NAME,
-    //   this.getUserId()
-    // );
-    // const userData = await getDoc(userRef);
-    // let userDetails: UserDetailsDto = {
-    //   profile: userData.get('UserData') as UserProfileDto,
-    //   Projects: userData.get('Projects') as ProjectDto[]
-    // }
-    // return userDetails;
+      this.projectDetails.set(projects);
+      console.log('Current Projects: ', this.projectDetails());
+    });
   }
 
   getUserId(): string {
@@ -63,12 +71,11 @@ export class UserService {
     if (result?.user?.uid) {
       const userRef = doc(
         this.databseService.database,
-        Constant.USER_TABLE_NAME,
+        Constant.TABLE_USER,
         result.user.uid
       );
       const userData = await getDoc(userRef);
       if (!userData.exists()) {
-        let Projects: ProjectDto[] = [];
         let UserData = {
           Name: result.user.displayName,
           Email: result.user.email,
@@ -80,7 +87,7 @@ export class UserService {
           ProviderId: result.user.providerId,
         };
         await setDoc(userRef, {
-          UserData, Projects
+          UserData,
         })
           .then((res) => {
             response = true;
@@ -104,7 +111,7 @@ export class UserService {
     let response = false;
     console.log('USER:: ', this.currentUser());
     this.db
-      .object(Constant.USER_TABLE_NAME + '/' + this.currentUser()?.uid)
+      .object(Constant.TABLE_USER + '/' + this.currentUser()?.uid)
       .update({ ContactNumber: phoneNumber })
       .then((res) => {
         response = true;

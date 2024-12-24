@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { StorageService } from '../../common/storage.service';
 import { UserDto } from './login.model';
-import { UserDetailsDto } from '../../db/database.model';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +23,7 @@ export class LoginComponent {
     this.fireauth.authState.subscribe((user) => {
       this.userService.currentUser.set(user);
       if (!user?.isAnonymous) {
-        this.userService
-          .GetCurrentUserDocument()
-          .then((value: UserDetailsDto) => {
-            this.userService.userDetailsDto.set(value);
-          });
+        this.userService.GetCurrentUserData();
       }
     });
   }
