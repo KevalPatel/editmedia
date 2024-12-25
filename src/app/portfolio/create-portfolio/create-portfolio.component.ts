@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { ProjectsService } from '../projects/projects.service';
 import $ from 'jquery';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'create-portfolio',
@@ -22,7 +23,8 @@ export class CreatePortfolioComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private projectService: ProjectsService
+    private projectService: ProjectsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -66,9 +68,18 @@ export class CreatePortfolioComponent implements OnInit {
         .CreateProject(this.projectForm.value)
         .then((res: boolean) => {
           console.log("Component SUCC: ", res);
+          this.toastr.success('Project Created Successfully', 'We will review your data and get in touch with you for further discussion.');
+          this.projectForm.reset();
         })
         .catch((res: any) => {
+          this.toastr.error('We faced an issue while creating your project. Please refresh the page and try again.')
           console.log("Component Err: ", res);
+        }).finally(() => {
+          window.scroll({ 
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth' 
+          });
         });
       console.log('Form Submitted', this.projectForm.value);
     }
