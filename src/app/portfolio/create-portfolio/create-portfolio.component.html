@@ -14,9 +14,9 @@
 
         <!-- Project Type -->
         <div class="mb-3">
-            <label for="projectType" class="form-label">Project Type</label>
+            <label for="projectType" class="form-label">Project Type <span class="text-danger">*</span></label>
             <select id="projectType" class="form-select" formControlName="projectType">
-                <option value="">Select Project Type</option>
+                <option value="" selected>Select Event Type</option>
                 <option value="Wedding">Wedding</option>
                 <option value="Ring Ceremony">Ring Ceremony</option>
                 <option value="Birthday">Birthday</option>
@@ -30,8 +30,8 @@
             <label class="form-label">Requirements</label>
             <div class="d-flex flex-wrap gap-3">
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="RequirePhotoAlbum" class="form-check-input"
-                        formControlName="requirement" value="PHOTO" />
+                    <input type="radio" id="RequirePhotoAlbum" class="form-check-input" formControlName="requirement"
+                        value="PHOTO" />
                     <div class="text-center">
                         <label class="form-check-label" for="RequirePhotoAlbum">
                             <div class="container mt-5">
@@ -47,8 +47,8 @@
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="RequireVideo" class="form-check-input" 
-                    formControlName="requirement" value="VIDEO" />
+                    <input type="radio" id="RequireVideo" class="form-check-input" formControlName="requirement"
+                        value="VIDEO" />
                     <div class="text-center">
                         <label class="form-check-label" for="RequireVideo">
                             <div class="container mt-5">
@@ -82,11 +82,11 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="mb-3">
-            <label for="UserFilesStorageLocationURL" class="form-label">Provide the raw data link.</label>
-            <input type="text" id="UserFilesStorageLocationURL" class="form-control" formControlName="UserFilesStorageLocationURL" maxlength="500"
-                placeholder="Ensure the raw data is publicly accessible and provide its link" />
+            <label for="UserFilesStorageLocationURL" class="form-label">Provide the raw data link. (multiple links can be provided)</label>
+            <textarea id="UserFilesStorageLocationURL" class="form-control" formControlName="UserFilesStorageLocationURL" rows="3"
+                maxlength="2000" placeholder="Ensure the raw data is publicly accessible and provide its link"></textarea>
         </div>
 
         <ng-container *ngIf="isVideoRequired()">
@@ -96,12 +96,12 @@
                 <input type="number" id="expectedVideoLength" class="form-control" formControlName="expectedVideoLength"
                     placeholder="Enter video length in minutes" />
             </div>
-        
+
             <!-- Preffered Audio -->
             <div class="mb-3">
                 <label for="preferedAudio" class="form-label">Preffered Audio for video</label>
-                <input type="text" id="preferedAudio" class="form-control" formControlName="preferedAudio" maxlength="500"
-                    placeholder="Provide audio name or link of your choice" />
+                <input type="text" id="preferedAudio" class="form-control" formControlName="preferedAudio"
+                    maxlength="500" placeholder="Provide audio name or link of your choice" />
             </div>
         </ng-container>
 

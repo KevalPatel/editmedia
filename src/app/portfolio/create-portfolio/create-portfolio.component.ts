@@ -10,6 +10,7 @@ import {
 import { ProjectsService } from '../projects/projects.service';
 import $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
+import { CommonService } from '../../common/common.service';
 
 @Component({
   selector: 'create-portfolio',
@@ -24,13 +25,14 @@ export class CreatePortfolioComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectsService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private commonService: CommonService
   ) {}
 
   ngOnInit(): void {
     this.projectForm = this.fb.group({
       projectName: ['', [Validators.required, Validators.maxLength(250)]],
-      projectType: ['Wedding', [Validators.required]],
+      projectType: ['', [Validators.required]],
       requirement: ['', Validators.required],
       expectedVideoLength: [
         { value: '', disabled: true }
@@ -75,11 +77,7 @@ export class CreatePortfolioComponent implements OnInit {
           this.toastr.error('We faced an issue while creating your project. Please refresh the page and try again.')
           console.log("Component Err: ", res);
         }).finally(() => {
-          window.scroll({ 
-            top: 0, 
-            left: 0, 
-            behavior: 'smooth' 
-          });
+          this.commonService.NavigateToTop();
         });
       console.log('Form Submitted', this.projectForm.value);
     }
