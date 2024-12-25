@@ -30,14 +30,13 @@ export class CreatePortfolioComponent implements OnInit {
       projectType: ['Wedding', [Validators.required]],
       requirement: ['', Validators.required],
       expectedVideoLength: [
-        { value: '', disabled: true },
-        Validators.pattern('^[0-9]*$'),
+        { value: '', disabled: true }
       ],
+      UserFilesStorageLocationURL: ['', [Validators.required]],
       preferedAudio: ['', Validators.maxLength(600)],
       additionalNotes: ['', Validators.maxLength(2000)],
     });
 
-    // Watch for changes in the 'requirement' field
     this.projectForm.get('requirement')?.valueChanges.subscribe(() => {
       this.toggleVideoLengthField();
     });
@@ -62,9 +61,6 @@ export class CreatePortfolioComponent implements OnInit {
 
   onSubmit(): void {
     if (this.projectForm.valid) {
-      // let ProjectData: ProjectDto = {
-        
-      // };
       this.projectService
         .CreateProject(this.projectForm.value)
         .then((res: boolean) => {

@@ -50,36 +50,21 @@ export class ProjectsService {
       )
     );
     Project.TotalSizeAllowed = Constant.TOTAL_STORAGE_ALLOWED_PER_PROJECT;
-Project.IsActive = true;
+    Project.IsActive = true;
 
-    // // Below code is working, if require to add project details into another saparate collection.
-    // const t = doc(this.db.database, Constant.TABLE_PROJECT, '2');
-    // return await setDoc(t, {
-    //   project,
-    // })
-    //   .then((res: any) => {
-    //     console.log('new Project response:', res);
-    //     return new Promise<boolean>((resolve, reject) => {
-    //       resolve(true);
-    //     });
-    //   })
-    //   .catch((err: any) => {
-    //     console.log('new Project failed:', err);
-    //     return new Promise<boolean>((resolve, reject) => {
-    //       reject(false);
-    //     });
-    //   });
-
+    const newProjectId = (this.userService.projectDetails()?.length || 0) + 1;
     const userRef = doc(
       this.db.database,
       Constant.TABLE_USER,
-      this.userService.getUserId(), Constant.TABLE_PROJECT, '3'
+      this.userService.getUserId(),
+      Constant.TABLE_PROJECT,
+      newProjectId.toString()
     );
     return await setDoc(userRef, {
       ...Project,
     })
       .then((res: any) => {
-        console.log('new Project response:', res);
+        console.log('new Project created:', res);
         return new Promise<boolean>((resolve, reject) => {
           resolve(true);
         });

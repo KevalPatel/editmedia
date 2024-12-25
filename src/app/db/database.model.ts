@@ -14,6 +14,7 @@ export class ProjectDto {
   projectName: string = '';
   FunctionType: string = '';
   Requirement: string = '';
+  UserFilesStorageLocationURL: string = '';
   StorageLocationURL: string = '';
   TotalSizeAllowed: number = 40;
   UserNotes?: string = '';
