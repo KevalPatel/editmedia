@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProjectsService } from '../projects/projects.service';
+import $ from 'jquery';
 
 @Component({
   selector: 'create-portfolio',
