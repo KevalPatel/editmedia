@@ -26,9 +26,7 @@ export class ProjectsComponent implements OnInit {
     private projectsService: ProjectsService,
     public userService: UserService
   ) {
-    effect(() => {
-      this.projects = this.userService.projectDetails();
-    });
+    this.projects = this.userService.projectDetails();
   }
 
   ngOnInit(): void {}

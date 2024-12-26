@@ -23,4 +23,5 @@ export class ProjectDto {
   CreatedOn: Date = new Date();
   ExpireOn: Date = new Date();
   IsActive: boolean = true;
+  ProjectId: number = 1;
 }

@@ -52,7 +52,16 @@ export class ProjectsService {
     Project.TotalSizeAllowed = Constant.TOTAL_STORAGE_ALLOWED_PER_PROJECT;
     Project.IsActive = true;
 
-    const newProjectId = (this.userService.projectDetails()?.length || 0) + 1;
+    let newProjectId = 1;
+    if (this.userService.projectDetails()?.length == 0) {
+      Project.ProjectId = 1;
+    } else {
+      let projects = this.userService.projectDetails();
+      if (projects != null) {
+        newProjectId = Math.max(...projects.map((x) => x?.ProjectId)) + 1;
+        Project.ProjectId = newProjectId;
+      }
+    }
     const userRef = doc(
       this.db.database,
       Constant.TABLE_USER,

@@ -67,13 +67,7 @@ export class UserService {
   }
 
   async IsUserExistsAndActive(): Promise<boolean> {
-    const userRef = doc(
-      this.databseService.database,
-      Constant.TABLE_USER,
-      this.getUserId()
-    );
-    const userData = await getDoc(userRef);
-    return userData.exists();
+    return this.userDetails() != null && this.userDetails()?.IsActive || false;
   }
 
   async CreateUserIfNotExists(
