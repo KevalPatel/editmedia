@@ -3,6 +3,7 @@
         <h5 class="card-title">Name: {{projectData()?.projectName}}</h5>
         <p class="card-text">Function Type: {{projectData()?.projectType}}</p>
         <p class="card-text">Expecting: {{projectData()?.requirement}}</p>
-        <a href="#" class="btn btn-primary">EDIT</a>
+        <p class="card-text">Status: {{projectData()?.currentStatus}}</p>
+        <button type="submit" class="btn btn-primary" [disabled]="projectData()?.currentStatus != 0">EDIT</button>
     </div>
 </div>
