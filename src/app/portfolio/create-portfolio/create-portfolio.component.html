@@ -16,7 +16,7 @@
         <div class="mb-3">
             <label for="projectType" class="form-label">Project Type <span class="text-danger">*</span></label>
             <select id="projectType" class="form-select" formControlName="projectType">
-                <option value="" selected>Select Event Type</option>
+                <option value="" selected></option>
                 <option value="Wedding">Wedding</option>
                 <option value="Ring Ceremony">Ring Ceremony</option>
                 <option value="Birthday">Birthday</option>
@@ -30,10 +30,10 @@
             <label class="form-label">Requirements</label>
             <div class="d-flex flex-wrap gap-3">
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="RequirePhotoAlbum" class="form-check-input" formControlName="requirement"
+                    <input type="radio" id="requirePhotoAlbum" class="form-check-input" formControlName="requirement"
                         value="PHOTO" />
                     <div class="text-center">
-                        <label class="form-check-label" for="RequirePhotoAlbum">
+                        <label class="form-check-label" for="requirePhotoAlbum">
                             <div class="container mt-5">
                                 <div class="video-box">
                                     <div class="icon-text">
@@ -64,10 +64,10 @@
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input type="radio" id="RequirePhotoAlbumAndVideo" class="form-check-input"
+                    <input type="radio" id="requirePhotoAlbumAndVideo" class="form-check-input"
                         formControlName="requirement" value="PHOTOVIDEO" />
                     <div class="text-center">
-                        <label class="form-check-label" for="RequirePhotoAlbumAndVideo">
+                        <label class="form-check-label" for="requirePhotoAlbumAndVideo">
                             <div class="container mt-5">
                                 <div class="video-box">
                                     <div class="icon-text">
@@ -84,8 +84,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="UserFilesStorageLocationURL" class="form-label">Provide the raw data link. (multiple links can be provided)</label>
-            <textarea id="UserFilesStorageLocationURL" class="form-control" formControlName="UserFilesStorageLocationURL" rows="3"
+            <label for="userFilesStorageLocationURL" class="form-label">Provide the raw data link. (multiple links can be provided)</label>
+            <textarea id="userFilesStorageLocationURL" class="form-control" formControlName="userFilesStorageLocationURL" rows="3"
                 maxlength="2000" placeholder="Ensure the raw data is publicly accessible and provide its link"></textarea>
         </div>
 

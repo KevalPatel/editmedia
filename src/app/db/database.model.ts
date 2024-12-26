@@ -11,17 +11,25 @@ export class UserProfileDto {
 }
 
 export class ProjectDto {
-  UserId: string = '';
+  userId: string = '';
   projectName: string = '';
-  FunctionType: string = '';
-  Requirement: string = '';
-  UserFilesStorageLocationURL: string = '';
-  StorageLocationURL: string = '';
-  TotalSizeAllowed: number = 40;
-  UserNotes?: string = '';
-  PreferedAudio?: string = '';
-  CreatedOn: Date = new Date();
-  ExpireOn: Date = new Date();
-  IsActive: boolean = true;
-  ProjectId: number = 1;
+  projectType: string = '';
+  requirement: string = '';
+  userFilesStorageLocationURL: string = '';
+  storageLocationURL: string = '';
+  totalSizeAllowed: number = 40;
+  userNotes?: string = '';
+  preferedAudio?: string = '';
+  createdOn: Date = new Date();
+  expireOn: Date = new Date();
+  isActive: boolean = true;
+  projectId: number = 1;
+  currentStatus: ProjectStatus = ProjectStatus.InReview
+}
+
+export enum ProjectStatus {
+  InReview,
+  InProgress,
+  Completed,
+  Discarded
 }

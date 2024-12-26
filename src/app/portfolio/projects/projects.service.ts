@@ -11,7 +11,7 @@ import {
   setDoc,
   updateDoc,
 } from '@angular/fire/firestore';
-import { ProjectDto } from '../../db/database.model';
+import { ProjectDto, ProjectStatus } from '../../db/database.model';
 import { addDoc } from '@firebase/firestore/lite';
 
 @Injectable({
@@ -42,24 +42,25 @@ export class ProjectsService {
       Constant.TABLE_PROJECT,
       this.userService.getUserId()
     );
-    Project.UserId = this.userService.currentUser()?.uid || '';
-    Project.CreatedOn = new Date();
-    Project.ExpireOn = new Date(
+    Project.userId = this.userService.currentUser()?.uid || '';
+    Project.createdOn = new Date();
+    Project.expireOn = new Date(
       new Date().setDate(
         new Date().getDate() + Constant.PROJECT_EXPIRATION_DAY_DURATION
       )
     );
-    Project.TotalSizeAllowed = Constant.TOTAL_STORAGE_ALLOWED_PER_PROJECT;
-    Project.IsActive = true;
+    Project.totalSizeAllowed = Constant.TOTAL_STORAGE_ALLOWED_PER_PROJECT;
+    Project.isActive = true;
+    Project.currentStatus = ProjectStatus.InReview;
 
     let newProjectId = 1;
     if (this.userService.projectDetails()?.length == 0) {
-      Project.ProjectId = 1;
+      Project.projectId = 1;
     } else {
       let projects = this.userService.projectDetails();
       if (projects != null) {
-        newProjectId = Math.max(...projects.map((x) => x?.ProjectId)) + 1;
-        Project.ProjectId = newProjectId;
+        newProjectId = Math.max(...projects.map((x) => x?.projectId)) + 1;
+        Project.projectId = newProjectId;
       }
     }
     const userRef = doc(

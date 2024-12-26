@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { StorageService } from '../../common/storage.service';
 import { UserDto } from './login.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent {
   private fireauth: AngularFireAuth = inject(AngularFireAuth);
   private userService: UserService = inject(UserService);
   private storageService: StorageService = inject(StorageService);
+  private toastr: ToastrService = inject(ToastrService);
 
   constructor(private router: Router) {
     this.fireauth.authState.subscribe((user) => {
@@ -35,6 +37,7 @@ export class LoginComponent {
         this.userService
           .CreateUserIfNotExists(gUser)
           .then((result: boolean) => {
+            this.toastr.success('User created successfully');
             console.log('Logged in with Google:', gUser.user);
 
             // Create object and keep inside storage.
@@ -58,6 +61,7 @@ export class LoginComponent {
           });
       })
       .catch((error) => {
+        this.toastr.success('There is a problem while creating user, please try again.');
         console.error('Error during login:', error);
       });
   }

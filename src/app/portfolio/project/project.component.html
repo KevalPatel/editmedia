@@ -1,2 +1,8 @@
-<p>project works!</p>
-<!-- {{projectData().id}} -->
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Name: {{projectData()?.projectName}}</h5>
+        <p class="card-text">Function Type: {{projectData()?.projectType}}</p>
+        <p class="card-text">Expecting: {{projectData()?.requirement}}</p>
+        <a href="#" class="btn btn-primary">EDIT</a>
+    </div>
+</div>

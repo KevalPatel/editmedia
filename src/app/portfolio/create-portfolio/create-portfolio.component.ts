@@ -39,7 +39,7 @@ export class CreatePortfolioComponent implements OnInit {
       expectedVideoLength: [
         { value: '', disabled: true }
       ],
-      UserFilesStorageLocationURL: ['', [Validators.required]],
+      userFilesStorageLocationURL: ['', [Validators.required]],
       preferedAudio: ['', Validators.maxLength(600)],
       additionalNotes: ['', Validators.maxLength(2000)],
     });
