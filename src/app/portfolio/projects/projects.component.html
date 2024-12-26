@@ -7,6 +7,6 @@
 <ng-container *ngIf="!projects || projects.length == 0">
     <div class="container text-center mt-5">
         <h4 class="mb-3">You don't have any projects.</h4>
-        <button class="btn btn-primary" [routerLink]="['/create-portfolio']">Create One</button>
+        <button class="btn btn-primary" [routerLink]="['/create-portfolio']" [disabled]="!userService.IsUserExistsAndActive()">Create One</button>
     </div>
 </ng-container>

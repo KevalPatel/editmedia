@@ -66,8 +66,8 @@ export class UserService {
     return this.currentUser()?.uid || '';
   }
 
-  async IsUserExistsAndActive(): Promise<boolean> {
-    return this.userDetails() != null && this.userDetails()?.IsActive || false;
+  IsUserExistsAndActive(): boolean {
+    return ((this.userDetails() != null) && this.userDetails()?.IsActive) || false;
   }
 
   async CreateUserIfNotExists(

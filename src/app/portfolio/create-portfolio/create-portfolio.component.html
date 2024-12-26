@@ -113,6 +113,6 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid || !userService.IsUserExistsAndActive()">Submit</button>
     </form>
 </div>

@@ -11,6 +11,7 @@ import { ProjectsService } from '../projects/projects.service';
 import $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../common/common.service';
+import { UserService } from '../../db/user.service';
 
 @Component({
   selector: 'create-portfolio',
@@ -26,7 +27,8 @@ export class CreatePortfolioComponent implements OnInit {
     private fb: FormBuilder,
     private projectService: ProjectsService,
     private toastr: ToastrService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    public userService: UserService
   ) {}
 
   ngOnInit(): void {
