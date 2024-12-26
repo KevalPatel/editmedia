@@ -3,7 +3,7 @@ import { Component, effect, OnInit } from '@angular/core';
 import { ProjectsService } from './projects.service';
 import { ProjectsDto } from './projects.model';
 import { ProjectComponent } from '../project/project.component';
-import { CreatePortfolioComponent } from '../create-portfolio/create-portfolio.component';
+import { CreateProjectComponent } from '../create-project/create-project.component';
 import { RouterModule } from '@angular/router';
 import { ProjectDto } from '../../db/database.model';
 import { UserService } from '../../db/user.service';
@@ -14,7 +14,7 @@ import { UserService } from '../../db/user.service';
   imports: [
     CommonModule,
     ProjectComponent,
-    CreatePortfolioComponent,
+    CreateProjectComponent,
     RouterModule,
   ],
   templateUrl: './projects.component.html',

@@ -14,13 +14,13 @@ import { CommonService } from '../../common/common.service';
 import { UserService } from '../../db/user.service';
 
 @Component({
-  selector: 'create-portfolio',
+  selector: 'create-project',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule, NgOptimizedImage],
-  templateUrl: './create-portfolio.component.html',
-  styleUrl: './create-portfolio.component.css',
+  templateUrl: './create-project.component.html',
+  styleUrl: './create-project.component.css',
 })
-export class CreatePortfolioComponent implements OnInit {
+export class CreateProjectComponent implements OnInit {
   projectForm!: FormGroup;
 
   constructor(
