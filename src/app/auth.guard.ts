@@ -27,22 +27,12 @@ export class AuthGuard implements CanActivate {
         }
       })
     );
+
+    // return new Promise<boolean>((resolve, reject) => {
+    //   this.userService.IsUserExistsAndActive().then((res: boolean) => {
+    //     return res;
+    //   });
+    // });
+
   }
 }
-
-// export const authGuard: CanActivateFn = (route, state) => {
-//   const userService = inject(UserService);
-//   const router = inject(Router);
-//   const auth = getAuth();
-
-//   const userId = auth?.currentUser?.uid;
-//   console.log('USERID:: ', userId);
-
-//   if (userService.isUserLoggedIn == false) {
-//     console.log('RETURN FALSE');
-//     router.navigate(['']);
-//     return false;
-//   }
-//   console.log('RETURN TRUE');
-//   return userService.isUserLoggedIn;
-// };

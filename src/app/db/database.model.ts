@@ -7,6 +7,7 @@ export class UserProfileDto {
   ProfilePic: string = '';
   ProviderId: string = '';
   TotalSizeAllowed = 50;
+  Role: string = 'Normal';
 }
 
 export class ProjectDto {

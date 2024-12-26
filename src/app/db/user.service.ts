@@ -14,6 +14,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { DatabaseService } from './database.service';
 import { ProjectDto, UserProfileDto } from './database.model';
 import { ref } from '@angular/fire/database';
+import { StorageService } from '../common/storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,8 @@ export class UserService {
 
   constructor(
     private db: AngularFireDatabase,
-    private databseService: DatabaseService
+    private databseService: DatabaseService,
+    private storageService: StorageService
   ) {
     effect(() => {
       this.isUserLoggedIn =
@@ -64,6 +66,16 @@ export class UserService {
     return this.currentUser()?.uid || '';
   }
 
+  async IsUserExistsAndActive(): Promise<boolean> {
+    const userRef = doc(
+      this.databseService.database,
+      Constant.TABLE_USER,
+      this.getUserId()
+    );
+    const userData = await getDoc(userRef);
+    return userData.exists();
+  }
+
   async CreateUserIfNotExists(
     result: firebase.auth.UserCredential
   ): Promise<boolean> {
@@ -85,6 +97,7 @@ export class UserService {
           IsActive: true,
           ProfilePic: result.user.photoURL,
           ProviderId: result.user.providerId,
+          Role: 'Normal'
         };
         await setDoc(userRef, {
           UserData,
