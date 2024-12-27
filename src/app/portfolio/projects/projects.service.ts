@@ -63,14 +63,14 @@ export class ProjectsService {
         Project.projectId = newProjectId;
       }
     }
-    const userRef = doc(
+    const projRef = doc(
       this.db.database,
       Constant.TABLE_USER,
       this.userService.getUserId(),
       Constant.TABLE_PROJECT,
       newProjectId.toString()
     );
-    return await setDoc(userRef, {
+    return await setDoc(projRef, {
       ...Project,
     })
       .then((res: any) => {
@@ -81,6 +81,36 @@ export class ProjectsService {
       })
       .catch((err: any) => {
         console.log('new Project failed:', err);
+        return new Promise<boolean>((resolve, reject) => {
+          reject(false);
+        });
+      });
+  }
+
+  async EditProject(Project: ProjectDto, projectId: number): Promise<boolean> {
+    const docRef = doc(
+      this.db.database,
+      Constant.TABLE_PROJECT,
+      this.userService.getUserId()
+    );
+    const projRef = doc(
+      this.db.database,
+      Constant.TABLE_USER,
+      this.userService.getUserId(),
+      Constant.TABLE_PROJECT,
+      projectId.toString()
+    );
+    return await updateDoc(projRef, {
+      ...Project,
+    })
+      .then((res: any) => {
+        console.log('edit Project success:', res);
+        return new Promise<boolean>((resolve, reject) => {
+          resolve(true);
+        });
+      })
+      .catch((err: any) => {
+        console.log('edit Project failed:', err);
         return new Promise<boolean>((resolve, reject) => {
           reject(false);
         });

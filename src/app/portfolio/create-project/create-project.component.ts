@@ -14,6 +14,7 @@ import { CommonService } from '../../common/common.service';
 import { UserService } from '../../db/user.service';
 import { Router } from '@angular/router';
 import { ProjectDto } from '../../db/database.model';
+import { Constant } from '../../common/constant';
 
 @Component({
   selector: 'create-project',
@@ -103,20 +104,38 @@ export class CreateProjectComponent implements OnInit {
         })
         .catch((res: any) => {
           this.toastr.error(
-            'We faced an issue while creating your project. Please refresh the page and try again.'
+            Constant.SYSTEM_DOWN_ISSUE
           );
           console.log('Component Err: ', res);
         })
         .finally(() => {
           this.commonService.NavigateToTop();
         });
-      console.log('Form Submitted', this.projectForm.value);
     }
   }
 
   EditProject() {
-    alert('edit');
     if (this.projectForm.valid) {
+      this.projectService
+        .EditProject(this.projectForm.value, +this.id)
+        .then((res: boolean) => {
+          console.log('project editted SUCC: ', res);
+          this.toastr.success(
+            'Project Updated Successfully',
+            'We will review your data and get in touch with you for further discussion.'
+          );
+          this.projectForm.reset();
+          this.router.navigate(['/projects']);
+        })
+        .catch((res: any) => {
+          this.toastr.error(
+            Constant.SYSTEM_DOWN_ISSUE
+          );
+          console.log('Edit Err: ', res);
+        })
+        .finally(() => {
+          this.commonService.NavigateToTop();
+        });
     }
   }
 }
