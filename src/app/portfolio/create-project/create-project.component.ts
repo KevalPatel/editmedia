@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, computed, effect, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../common/common.service';
 import { UserService } from '../../db/user.service';
 import { Router } from '@angular/router';
+import { ProjectDto } from '../../db/database.model';
 
 @Component({
   selector: 'create-project',
@@ -32,16 +33,34 @@ export class CreateProjectComponent implements OnInit {
     private commonService: CommonService,
     public userService: UserService,
     private router: Router
-  ) {}
+  ) {
+    effect(() => {
+      if (this.id) {
+        let projectDetail = this.userService
+          .projectDetails()
+          ?.find((x) => x.projectId?.toString() == this.id);
+        if (projectDetail) {
+          this.projectForm.setValue({
+            projectName: projectDetail?.projectName,
+            projectType: projectDetail?.projectType,
+            requirement: projectDetail?.requirement,
+            expectedVideoLength: projectDetail?.expectedVideoLength || 0,
+            userFilesStorageLocationURL:
+              projectDetail?.userFilesStorageLocationURL,
+            preferedAudio: projectDetail?.preferedAudio,
+            additionalNotes: projectDetail?.additionalNotes,
+          });
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.projectForm = this.fb.group({
       projectName: ['', [Validators.required, Validators.maxLength(250)]],
       projectType: ['', [Validators.required]],
       requirement: ['', Validators.required],
-      expectedVideoLength: [
-        { value: '', disabled: true }
-      ],
+      expectedVideoLength: [{ value: '', disabled: true }],
       userFilesStorageLocationURL: ['', [Validators.required]],
       preferedAudio: ['', Validators.maxLength(600)],
       additionalNotes: ['', Validators.maxLength(2000)],
@@ -50,10 +69,6 @@ export class CreateProjectComponent implements OnInit {
     this.projectForm.get('requirement')?.valueChanges.subscribe(() => {
       this.toggleVideoLengthField();
     });
-
-    if(this.id){
-      
-    }
   }
 
   toggleVideoLengthField(): void {
@@ -78,15 +93,21 @@ export class CreateProjectComponent implements OnInit {
       this.projectService
         .CreateProject(this.projectForm.value)
         .then((res: boolean) => {
-          console.log("Component SUCC: ", res);
-          this.toastr.success('Project Created Successfully', 'We will review your data and get in touch with you for further discussion.');
+          console.log('Component SUCC: ', res);
+          this.toastr.success(
+            'Project Created Successfully',
+            'We will review your data and get in touch with you for further discussion.'
+          );
           this.projectForm.reset();
           this.router.navigate(['/projects']);
         })
         .catch((res: any) => {
-          this.toastr.error('We faced an issue while creating your project. Please refresh the page and try again.')
-          console.log("Component Err: ", res);
-        }).finally(() => {
+          this.toastr.error(
+            'We faced an issue while creating your project. Please refresh the page and try again.'
+          );
+          console.log('Component Err: ', res);
+        })
+        .finally(() => {
           this.commonService.NavigateToTop();
         });
       console.log('Form Submitted', this.projectForm.value);

@@ -18,13 +18,14 @@ export class ProjectDto {
   userFilesStorageLocationURL: string = '';
   storageLocationURL: string = '';
   totalSizeAllowed: number = 40;
-  userNotes?: string = '';
+  additionalNotes?: string = '';
   preferedAudio?: string = '';
   createdOn: Date = new Date();
   expireOn: Date = new Date();
   isActive: boolean = true;
   projectId: number = 1;
-  currentStatus: ProjectStatus = ProjectStatus.InReview
+  currentStatus: ProjectStatus = ProjectStatus.InReview;
+  expectedVideoLength: number = 1;
 }
 
 export enum ProjectStatus {

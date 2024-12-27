@@ -4,6 +4,8 @@
             <project [projectData]="project" class="col-sm-3"></project>
         </ng-container>
     </div>
+    <button class="btn btn-primary" [routerLink]="['/create-project']"
+            [disabled]="!userService.IsUserExistsAndActive()">Create More Projects</button>
 </ng-container>
 
 <ng-container *ngIf="!projects || projects.length == 0">
