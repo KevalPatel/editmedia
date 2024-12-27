@@ -4,6 +4,7 @@
         <p class="card-text">Function Type: {{projectData()?.projectType}}</p>
         <p class="card-text">Expecting: {{projectData()?.requirement}}</p>
         <p class="card-text">Status: {{projectData()?.currentStatus}}</p>
-        <button type="submit" class="btn btn-primary" [disabled]="projectData()?.currentStatus != 0">EDIT</button>
+        <button type="submit" class="btn btn-primary" [disabled]="projectData()?.currentStatus != 0"
+            (click)="goToProjectEdit()">Edit</button>
     </div>
 </div>

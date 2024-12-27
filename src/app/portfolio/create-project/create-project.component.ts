@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,6 +12,7 @@ import $ from 'jquery';
 import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../common/common.service';
 import { UserService } from '../../db/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'create-project',
@@ -22,13 +23,15 @@ import { UserService } from '../../db/user.service';
 })
 export class CreateProjectComponent implements OnInit {
   projectForm!: FormGroup;
+  @Input() id = '';
 
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectsService,
     private toastr: ToastrService,
     private commonService: CommonService,
-    public userService: UserService
+    public userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +50,10 @@ export class CreateProjectComponent implements OnInit {
     this.projectForm.get('requirement')?.valueChanges.subscribe(() => {
       this.toggleVideoLengthField();
     });
+
+    if(this.id){
+      
+    }
   }
 
   toggleVideoLengthField(): void {
@@ -74,6 +81,7 @@ export class CreateProjectComponent implements OnInit {
           console.log("Component SUCC: ", res);
           this.toastr.success('Project Created Successfully', 'We will review your data and get in touch with you for further discussion.');
           this.projectForm.reset();
+          this.router.navigate(['/projects']);
         })
         .catch((res: any) => {
           this.toastr.error('We faced an issue while creating your project. Please refresh the page and try again.')
