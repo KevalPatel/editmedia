@@ -35,7 +35,7 @@ export class CreateProjectComponent implements OnInit {
     private router: Router
   ) {
     effect(() => {
-      if (this.id) {
+      if (+this.id) {
         let projectDetail = this.userService
           .projectDetails()
           ?.find((x) => x.projectId?.toString() == this.id);
@@ -88,7 +88,7 @@ export class CreateProjectComponent implements OnInit {
     return requirement === 'VIDEO' || requirement === 'PHOTOVIDEO';
   }
 
-  onSubmit(): void {
+  CreateProject(): void {
     if (this.projectForm.valid) {
       this.projectService
         .CreateProject(this.projectForm.value)
@@ -111,6 +111,12 @@ export class CreateProjectComponent implements OnInit {
           this.commonService.NavigateToTop();
         });
       console.log('Form Submitted', this.projectForm.value);
+    }
+  }
+
+  EditProject() {
+    alert('edit');
+    if (this.projectForm.valid) {
     }
   }
 }

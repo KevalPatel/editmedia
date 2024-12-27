@@ -1,7 +1,6 @@
-{{projectForm.value|json}}
 <div class="container mt-4">
     <h2>Create New Project</h2>
-    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="projectForm">
         <!-- Project Name -->
         <div class="mb-3">
             <label for="projectName" class="form-label">Project Name <span class="text-danger">*</span></label>
@@ -85,9 +84,11 @@
         </div>
 
         <div class="mb-3">
-            <label for="userFilesStorageLocationURL" class="form-label">Provide the raw data link. (multiple links can be provided)</label>
-            <textarea id="userFilesStorageLocationURL" class="form-control" formControlName="userFilesStorageLocationURL" rows="3"
-                maxlength="2000" placeholder="Ensure the raw data is publicly accessible and provide its link"></textarea>
+            <label for="userFilesStorageLocationURL" class="form-label">Provide the raw data link. (multiple links can
+                be provided)</label>
+            <textarea id="userFilesStorageLocationURL" class="form-control"
+                formControlName="userFilesStorageLocationURL" rows="3" maxlength="2000"
+                placeholder="Ensure the raw data is publicly accessible and provide its link"></textarea>
         </div>
 
         <ng-container *ngIf="isVideoRequired()">
@@ -114,6 +115,11 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid || !userService.IsUserExistsAndActive()">Submit</button>
+        <button type="submit" class="btn btn-primary"
+            [disabled]="projectForm.invalid || !userService.IsUserExistsAndActive()" *ngIf="!id"
+            (click)="CreateProject()">Create</button>
+        <button type="submit" class="btn btn-primary"
+            [disabled]="projectForm.invalid || !userService.IsUserExistsAndActive()" *ngIf="id"
+            (click)="EditProject()">Edit</button>
     </form>
 </div>
