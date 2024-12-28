@@ -15,8 +15,7 @@ img:hover {
 .video-box {
   width: 100%;
   height: 100%;
-  background-color: #d3d3d3;
-  /* Gray color */
+  /* background-color: #d3d3d3; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +29,6 @@ img:hover {
 }
 
 .video-box .icon-text i {
-  font-size: 60px;
+  font-size: 30px;
   display: block;
 }

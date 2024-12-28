@@ -1,83 +1,96 @@
-<div class="container mt-4">
+<div class="container mt-2">
+    <!-- <div class="row">
+        <div class="col">
+            LEFT
+          </div>
+          <div class="col">
+            2 of 2
+          </div>
+    </div> -->
     <h2>Create New Project</h2>
     <form [formGroup]="projectForm">
-        <!-- Project Name -->
         <div class="mb-3">
-            <label for="projectName" class="form-label">Project Name <span class="text-danger">*</span></label>
-            <input type="text" id="projectName" class="form-control" formControlName="projectName" maxlength="250"
-                placeholder="Enter project name" required />
-            <div *ngIf="projectForm.get('projectName')?.invalid && projectForm.get('projectName')?.touched"
-                class="text-danger">
-                Project name is required and cannot exceed 250 characters.
+            <div class="row">
+                <div class="col">
+                    <label for="projectName" class="form-label">Project Name <span class="text-danger">*</span></label>
+                    <input type="text" id="projectName" class="form-control" formControlName="projectName"
+                        maxlength="250" placeholder="Enter project name" required />
+                    <div *ngIf="projectForm.get('projectName')?.invalid && projectForm.get('projectName')?.touched"
+                        class="text-danger">
+                        Project name is required and cannot exceed 250 characters.
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="projectType" class="form-label">Project Type <span class="text-danger">*</span></label>
+                    <select id="projectType" class="form-select" formControlName="projectType">
+                        <option value="" selected></option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Ring Ceremony">Ring Ceremony</option>
+                        <option value="Birthday">Birthday</option>
+                        <option value="Travel Journey">Travel Journey</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <!-- Project Type -->
         <div class="mb-3">
-            <label for="projectType" class="form-label">Project Type <span class="text-danger">*</span></label>
-            <select id="projectType" class="form-select" formControlName="projectType">
-                <option value="" selected></option>
-                <option value="Wedding">Wedding</option>
-                <option value="Ring Ceremony">Ring Ceremony</option>
-                <option value="Birthday">Birthday</option>
-                <option value="Travel Journey">Travel Journey</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-
-        <!-- Boolean Options -->
-        <div class="mb-3">
-            <label class="form-label">Requirements</label>
-            <div class="d-flex flex-wrap gap-3">
-                <div class="form-check form-check-inline">
-                    <input type="radio" id="requirePhotoAlbum" class="form-check-input" formControlName="requirement"
-                        value="PHOTO" />
-                    <div class="text-center">
-                        <label class="form-check-label" for="requirePhotoAlbum">
-                            <div class="container mt-5">
-                                <div class="video-box">
-                                    <div class="icon-text">
-                                        <i class="bi bi-camera fa-4x"></i> <!-- camera Icon -->
+            <div class="row">
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <div class="text-center">
+                            <label class="form-check-label" for="requirePhotoAlbum">
+                                <div class="container">
+                                    <div class="video-box">
+                                        <div class="icon-text">
+                                            <i class="bi bi-camera fa-4x"></i>
+                                            <input type="radio" id="requirePhotoAlbum" class="form-check-input"
+                                                formControlName="requirement" value="PHOTO" />
+                                        </div>
                                         <span>Only Photo Album</span>
                                     </div>
                                 </div>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
                     </div>
                 </div>
+                <div class="col">
+                    <div class="form-check form-check-inline">
 
-                <div class="form-check form-check-inline">
-                    <input type="radio" id="RequireVideo" class="form-check-input" formControlName="requirement"
-                        value="VIDEO" />
-                    <div class="text-center">
-                        <label class="form-check-label" for="RequireVideo">
-                            <div class="container mt-5">
-                                <div class="video-box">
-                                    <div class="icon-text">
-                                        <i class="bi bi-camera-video fa-4x"></i> <!-- Video Icon -->
+                        <div class="text-center">
+                            <label class="form-check-label" for="RequireVideo">
+                                <div class="container">
+                                    <div class="video-box">
+                                        <div class="icon-text">
+                                            <i class="bi bi-camera-video fa-4x"></i>
+                                            <input type="radio" id="RequireVideo" class="form-check-input"
+                                                formControlName="requirement" value="VIDEO" />
+                                        </div>
                                         <span>Only Video</span>
                                     </div>
                                 </div>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
                     </div>
                 </div>
+                <div class="col">
+                    <div class="form-check form-check-inline">
 
-                <div class="form-check form-check-inline">
-                    <input type="radio" id="requirePhotoAlbumAndVideo" class="form-check-input"
-                        formControlName="requirement" value="PHOTOVIDEO" />
-                    <div class="text-center">
-                        <label class="form-check-label" for="requirePhotoAlbumAndVideo">
-                            <div class="container mt-5">
-                                <div class="video-box">
-                                    <div class="icon-text">
-                                        <i class="bi bi-camera fa-2x" style="float: left;"></i>
-                                        <i class="bi bi-camera-video fa-2x"></i>
-                                        <span>Photo & Video</span>
+                        <div class="text-center">
+                            <label class="form-check-label" for="requirePhotoAlbumAndVideo">
+                                <div class="container">
+                                    <div class="video-box">
+                                        <div class="icon-text">
+                                            <!-- <i class="bi bi-camera fa-2x" style="float: left;"></i> -->
+                                            <i class="bi bi-camera-video fa-2x"></i>
+                                            <input type="radio" id="requirePhotoAlbumAndVideo" class="form-check-input"
+                                                formControlName="requirement" value="PHOTOVIDEO" />
+                                        </div>
+                                        <span>Both (Photo & Video)</span>
                                     </div>
                                 </div>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,35 +99,34 @@
         <div class="mb-3">
             <label for="userFilesStorageLocationURL" class="form-label">Provide the raw data link. (multiple links can
                 be provided)</label>
-            <textarea id="userFilesStorageLocationURL" class="form-control"
-                formControlName="userFilesStorageLocationURL" rows="3" maxlength="2000"
-                placeholder="Ensure the raw data is publicly accessible and provide its link"></textarea>
+            <input type="text" id="userFilesStorageLocationURL" class="form-control"
+                formControlName="userFilesStorageLocationURL" maxlength="1000"
+                placeholder="Ensure the raw data is publicly accessible and provide its link" />
         </div>
 
         <ng-container *ngIf="isVideoRequired()">
-            <!-- Expected Video Length -->
             <div class="mb-3">
-                <label for="expectedVideoLength" class="form-label">Expected Video Length (Minutes)</label>
-                <input type="number" id="expectedVideoLength" class="form-control" formControlName="expectedVideoLength"
-                    placeholder="Enter video length in minutes" />
-            </div>
-
-            <!-- Preffered Audio -->
-            <div class="mb-3">
-                <label for="preferedAudio" class="form-label">Preffered Audio for video</label>
-                <input type="text" id="preferedAudio" class="form-control" formControlName="preferedAudio"
-                    maxlength="500" placeholder="Provide audio name or link of your choice" />
+                <div class="row">
+                    <div class="col">
+                        <label for="expectedVideoLength" class="form-label">Expected Video Length (Minutes)</label>
+                        <input type="number" id="expectedVideoLength" class="form-control"
+                            formControlName="expectedVideoLength" placeholder="Enter video length in minutes" />
+                    </div>
+                    <div class="col">
+                        <label for="preferedAudio" class="form-label">Preffered Audio</label>
+                        <input type="text" id="preferedAudio" class="form-control" formControlName="preferedAudio"
+                            maxlength="500" placeholder="Provide audio name or link of your choice" />
+                    </div>
+                </div>
             </div>
         </ng-container>
 
-        <!-- Additional Notes -->
         <div class="mb-3">
             <label for="additionalNotes" class="form-label">Additional Notes</label>
-            <textarea id="additionalNotes" class="form-control" formControlName="additionalNotes" rows="5"
+            <textarea id="additionalNotes" class="form-control" formControlName="additionalNotes" rows="3"
                 maxlength="2000" placeholder="Provide additional details here..."></textarea>
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn btn-primary"
             [disabled]="projectForm.invalid || !userService.IsUserExistsAndActive()" *ngIf="!id"
             (click)="CreateProject()">Create</button>

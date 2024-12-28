@@ -13,12 +13,15 @@ import {
 } from '@angular/fire/firestore';
 import { ProjectDto, ProjectStatus } from '../../db/database.model';
 import { addDoc } from '@firebase/firestore/lite';
+import { CommonService } from '../../common/common.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectsService {
-  constructor(private userService: UserService, private db: DatabaseService) {}
+  constructor(private userService: UserService, 
+    private db: DatabaseService,
+  private commonService: CommonService) {}
 
   // async getProjects(): Promise<ProjectsDto> {
   //   let result: ProjectsDto = {};
@@ -53,22 +56,13 @@ export class ProjectsService {
     Project.isActive = true;
     Project.currentStatus = ProjectStatus.InReview;
 
-    let newProjectId = 1;
-    if (this.userService.projectDetails()?.length == 0) {
-      Project.projectId = 1;
-    } else {
-      let projects = this.userService.projectDetails();
-      if (projects != null) {
-        newProjectId = Math.max(...projects.map((x) => x?.projectId)) + 1;
-        Project.projectId = newProjectId;
-      }
-    }
+    Project.projectId = this.commonService.GenerateRandomDigit();
     const projRef = doc(
       this.db.database,
       Constant.TABLE_USER,
       this.userService.getUserId(),
       Constant.TABLE_PROJECT,
-      newProjectId.toString()
+      Project.projectId.toString()
     );
     return await setDoc(projRef, {
       ...Project,
